@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+//All variable decler in global
+
 float cloud1X = 100.0f, cloud1Y = 750.0f; // Initial position of Cloud 1
 float cloud2X = 250.0f, cloud2Y = 800.0f; // Initial position of Cloud 2
 float cloud3X = 700.0f, cloud3Y = 820.0f; // Initial position of Cloud 3
@@ -12,7 +14,7 @@ float cloudSpeed = 1.0f; // Speed of cloud movement
 bool isNight = false; // Flag for day/night mode
 
 float carX = 0.0f; // Horizontal position of the car
-float carSpeed = 2.0f; // Speed of the car
+float carSpeed = 5.0f; // Speed of the car
 
 float cary = 900.0f; // Horizontal position of the car
 float carSpeed1 = 2.0f; // Speed of the car
@@ -129,7 +131,7 @@ void drawmillcircle(float x_center, float y_center, float radius) {
 void movewind(int) {
     if(isNight)
     {
-    bladeAngle += 5.0f; // Rotate blades
+    bladeAngle += 20.0f; // Rotate blades
     if (bladeAngle > 360.0f) {
         bladeAngle -= 360.0f;
     }
@@ -151,8 +153,8 @@ void display()
         glColor3f(0.1f, 0.1f, 0.3f); // Dark blue for night
         glVertex2i(0, 900);
         glVertex2i(900, 900);
-        glVertex2i(900, 600);
-        glVertex2i(0, 600);
+        glVertex2i(900, 400);
+        glVertex2i(0, 400);
         glEnd();
     }
     else
@@ -161,14 +163,14 @@ void display()
         glColor3f(0.6f, 0.9f, 1.0f); // Brighter sky blue
         glVertex2i(0, 900);
         glVertex2i(900, 900);
-        glVertex2i(900, 600);
-        glVertex2i(0, 600);
+        glVertex2i(900, 400);
+        glVertex2i(0, 400);
         glEnd();
 
     }
 
 
-    //------------------------------------------------
+//-----------------------------------------------------
 
 
 //star in night sky
@@ -190,7 +192,32 @@ void display()
         glVertex2i(850, 850); // Star 9
         glEnd();
     }
-//--------------------------------------------------
+//--------------------------------------------------------------
+
+
+// Mountains - Dark Grayish Color
+glBegin(GL_TRIANGLES);
+if(isNight){
+glColor3f(0.0f, 0.2f, 0.1f);
+}
+else{
+    glColor3f(0.0f, 0.5f, 0.0f);
+}
+
+// Left Mountain
+glVertex2i(50, 400);
+glVertex2i(300, 700);
+glVertex2i(550, 400);
+
+// Right Mountain
+glVertex2i(400, 400);
+glVertex2i(700, 750);
+glVertex2i(1000, 400);
+
+glEnd();
+
+
+//----------------------------------------------------------
 
 
     // Road
@@ -333,46 +360,7 @@ void display()
     }
 //--------------------------------------------------------------
 
-
-    // Mountain 1
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.2f, 0.8f, 0.3f);
-    glVertex2i(250, 600);
-    glVertex2i(330, 700);
-    glVertex2i(420, 600);
-    glEnd();
-    //------------------------------------------------
-
-    // Mountain 2
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.0f, 0.6f, 0.2f);
-    glVertex2i(400, 600);
-    glVertex2i(480, 770);
-    glVertex2i(580, 600);
-    glEnd();
-    //------------------------------------------------
-
-    // Mountain 3 (Left of Mountain 1)
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.0f, 0.6f, 0.2f);
-    glVertex2i(100, 600);
-    glVertex2i(200, 720);
-    glVertex2i(300, 600);
-    glEnd();
-    //------------------------------------------------
-
-
-
-    // Mountain 4 (Right of Mountain 2)
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.2f, 0.8f, 0.3f);
-    glVertex2i(500, 600);
-    glVertex2i(600, 730);
-    glVertex2i(700, 600);
-    glEnd();
-    //------------------------------------------------
-
-    //draw flower tree
+//draw flower tree
 
     //main brach( kando)
     glBegin(GL_LINES);
@@ -503,10 +491,8 @@ drawCircle(920.0f, 720.0f, 25.5f, 100); // Right circle
     glVertex2i(-100, 10);
     glVertex2i(0, 10);
     glEnd();
-
-
-
     glPopMatrix(); // Restore original position
+
 
 
 
