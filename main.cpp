@@ -23,6 +23,9 @@ float carSpeed1 = 2.0f; // Speed of the car
 float bladeAngle = 0.0f; // Rotation angle for windmill blades
 
 
+//-----------------------------------------------------------------------
+
+
 
 
 // draw any circle function
@@ -46,19 +49,26 @@ void drawCircle(float centerX, float centerY, float radius, int numSegments)
 
 void drawCloud(float centerX, float centerY, float radius)
 {
-    glColor3f(1.0f, 1.0f, 1.0f); // White color for the cloud
+    glColor3f(0.9f, 0.9f, 0.9f); // Light grayish-white for a soft cloud look
 
-    // Base of the cloud
-    drawCircle(centerX, centerY, radius, 100); // Main circle
+    // Core cloud body (big overlapping circles)
+    drawCircle(centerX, centerY, radius, 100);
+    drawCircle(centerX + 20, centerY + 10, radius - 5, 100);
+    drawCircle(centerX - 20, centerY + 10, radius - 5, 100);
 
-    // Top part of the cloud
-    drawCircle(centerX + 20, centerY + 30, radius - 10, 100); // Right-top circle
-    drawCircle(centerX - 20, centerY + 30, radius - 10, 100); // Left-top circle
+    // Top fluff (smaller circles to make curves)
+    drawCircle(centerX + 35, centerY + 15, radius - 15, 100);
+    drawCircle(centerX - 35, centerY + 15, radius - 15, 100);
+    drawCircle(centerX + 10, centerY + 25, radius - 12, 100);
+    drawCircle(centerX - 10, centerY + 25, radius - 12, 100);
 
-    // Side parts of the cloud
-    drawCircle(centerX + 30, centerY, radius - 15, 100); // Right circle
-    drawCircle(centerX - 30, centerY, radius - 15, 100); // Left circle
+    // Bottom fluff (extra curves to remove circle look)
+    drawCircle(centerX + 25, centerY - 10, radius - 18, 100);
+    drawCircle(centerX - 25, centerY - 10, radius - 18, 100);
 }
+
+
+
 //-------------------------------------------------------------------
 
 
@@ -126,6 +136,7 @@ void drawmillcircle(float x_center, float y_center, float radius) {
     }
     glEnd();
 }
+
 //-------------------------------------------------------------------
 
 void movewind(int) {
@@ -139,6 +150,178 @@ void movewind(int) {
     glutPostRedisplay(); // Redraw screen
     glutTimerFunc(50, movewind, 0); // Call again after 50ms
 }
+
+
+void grass1()
+{
+    glColor3f(0.0f, 1.0f, 0.0f);
+  drawCircle(810.0f, 350.0f, 3.5f, 100);
+
+  glBegin(GL_LINES);
+    glColor3f(0.0f, 1.0f, 0.0f);
+
+    //----------------
+    glVertex2i(795, 367);
+    glVertex2i(809, 347);
+
+    //-----------------
+    glVertex2i(800, 377);// 2nd part
+    glVertex2i(810, 347);
+
+    //-----------------
+    glVertex2i(805, 387);
+    glVertex2i(811, 347);
+
+
+
+    //-----------------
+    glVertex2i(815, 377);
+    glVertex2i(810, 347);
+
+
+    //-----------------
+    glVertex2i(825, 387);
+    glVertex2i(810, 347);
+
+
+    //-----------------
+    glVertex2i(832, 387);
+    glVertex2i(810, 347);
+
+    glEnd();
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    drawCircle(795, 367,  5.5f, 100);
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    drawCircle(805, 387,  5.5f, 100);
+
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    drawCircle(832, 387,  5.5f, 100);
+
+}
+
+void grass2()
+{
+    glColor3f(0.0f, 1.0f, 0.0f);
+    drawCircle(720.0f, 355.0f, 3.5f, 100);  // Shifted further right
+
+    glBegin(GL_LINES);
+    glColor3f(0.0f, 1.0f, 0.0f);
+
+    glVertex2i(685, 372);
+    glVertex2i(719, 352);
+
+    glVertex2i(690, 382);
+    glVertex2i(720, 352);
+
+    glVertex2i(695, 392);
+    glVertex2i(721, 352);
+
+    glVertex2i(705, 382);
+    glVertex2i(720, 352);
+
+    glVertex2i(715, 392);
+    glVertex2i(720, 352);
+
+    glVertex2i(722, 392);
+    glVertex2i(720, 352);
+
+    glEnd();
+
+    glColor3f(1.0f, 1.0f, 0.0f);
+    drawCircle(685, 372, 5.5f, 100);
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    drawCircle(695, 392, 5.5f, 100);
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    drawCircle(722, 392, 5.5f, 100);
+}
+
+void grass3()
+{
+    glColor3f(0.0f, 1.0f, 0.0f);
+    drawCircle(500.0f, 360.0f, 3.5f, 100);  // Different base position
+
+    glBegin(GL_LINES);
+    glColor3f(0.0f, 1.0f, 0.0f);
+
+    // Left-leaning blades
+    glVertex2i(480, 380);
+    glVertex2i(500, 350);
+
+    glVertex2i(485, 390);
+    glVertex2i(500, 350);
+
+    glVertex2i(490, 400);
+    glVertex2i(500, 350);
+
+    // Right-leaning blades
+    glVertex2i(510, 390);
+    glVertex2i(500, 350);
+
+    glVertex2i(520, 400);
+    glVertex2i(500, 350);
+
+    glVertex2i(530, 390);
+    glVertex2i(500, 350);
+
+    glEnd();
+
+    // Flowers with different colors
+    glColor3f(1.0f, 0.5f, 0.0f);  // Orange
+    drawCircle(485, 390, 5.5f, 100);
+
+    glColor3f(1.0f, 0.0f, 1.0f);  // Magenta
+    drawCircle(520, 400, 5.5f, 100);
+
+    glColor3f(0.5f, 1.0f, 0.5f);  // Light green
+    drawCircle(530, 390, 5.5f, 100);
+}
+
+
+
+//---------------------------------------------------------------------
+
+
+// carx and cary
+void specialKeypress1(int key, int x, int y)
+{
+    if (key == GLUT_KEY_RIGHT)
+    {
+        carSpeed += 1.0f; // Increase speed when right arrow is pressed red car
+    }
+    else if (key == GLUT_KEY_LEFT)
+    {
+        carSpeed -= 1.0f; // Increase speed when right arrow is pressed red car
+    }
+    else if (key == GLUT_KEY_UP)
+    {
+        carSpeed1 += 1.0f; // Increase speed when top arrow is pressed for bus
+    }
+    else if (key == GLUT_KEY_DOWN)
+    {
+        carSpeed1 -= 1.0f; // Increase speed when down arrow is pressed red car
+    }
+}
+
+/*void specialKeypress2(int key, int x, int y)
+{
+    if (key == GLUT_KEY_UP)
+    {
+        carSpeed1 += 1.0f; // Increase speed when top arrow is pressed for bus
+    }
+    else if (key == GLUT_KEY_DOWN)
+    {
+        carSpeed1 -= 1.0f; // Increase speed when down arrow is pressed red car
+    }
+}*/
+
+
+
+//-------------------------------------------------------------------------
 
 
 void display()
@@ -198,7 +381,7 @@ void display()
 // Mountains - Dark Grayish Color
 glBegin(GL_TRIANGLES);
 if(isNight){
-glColor3f(0.0f, 0.2f, 0.1f);
+glColor3f(0.0f, 0.3f, 0.1f); // Dark green but slightly brighter
 }
 else{
     glColor3f(0.0f, 0.5f, 0.0f);
@@ -398,15 +581,24 @@ glEnd();
 
     //-------------------------------------------------------------------------
 
+    grass1();
+    grass2();
+    grass3();
 
-    // tree
+
+
+
+    //-------------------------------------------------------------------------
+
+
+// tree
  // Trunk
 glBegin(GL_QUADS);
 glColor3f(0.55f, 0.27f, 0.07f); // Brown color for trunk
 glVertex2i(880, 600); // Top-left
 glVertex2i(900, 600); // Top-right
-glVertex2i(900, 350); // Bottom-right
-glVertex2i(880, 350); // Bottom-left
+glVertex2i(900, 400); // Bottom-right
+glVertex2i(880, 400); // Bottom-left
 glEnd();
 
 // Leaves - Bottom row
@@ -441,11 +633,11 @@ drawCircle(920.0f, 720.0f, 25.5f, 100); // Right circle
 
 // Windmill Base (Given coordinates)
     glBegin(GL_QUADS);
-    glColor3f(0.6f, 0.3f, 0.0f); // Brown
-    glVertex2i(720, 370);
+    glColor3f(0.44f, 0.5f, 0.56f);
+    glVertex2i(720, 400);
     glVertex2i(720, 650);
     glVertex2i(750, 650);
-    glVertex2i(750, 370);
+    glVertex2i(750, 400);
     glEnd();
 
     // Windmill Pivot (Circular center for blades)
@@ -494,19 +686,7 @@ drawCircle(920.0f, 720.0f, 25.5f, 100); // Right circle
     glPopMatrix(); // Restore original position
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+//----------------------------------------------------------
 
 
 
@@ -594,6 +774,27 @@ drawCircle(920.0f, 720.0f, 25.5f, 100); // Right circle
     glEnd();
 
 //-------------------------------------------------------
+// Tree Trunk (Increased Height)
+glBegin(GL_QUADS);
+glColor3f(0.6f, 0.3f, 0.1f); // Brown trunk
+glVertex2i(250, 400);  // Bottom left
+glVertex2i(250, 500);  // Increased height (previously 470)
+glVertex2i(270, 500);  // Increased height
+glVertex2i(270, 400);  // Bottom right
+glEnd();
+
+// Tree Leaves (Green Color)
+glColor3f(0.0f, 0.7f, 0.0f);
+drawCircle(260, 530, 30, 100); // Moved up (previously 500)
+drawCircle(240, 510, 25, 100); // Moved up (previously 480)
+drawCircle(280, 510, 25, 100); // Moved up (previously 480)
+
+
+
+
+
+
+//----------------------------------------------------
 
 
 // House 2 - Attached to House 1
@@ -734,20 +935,42 @@ drawCircle(920.0f, 720.0f, 25.5f, 100); // Right circle
 
 //-------------------------------------------------
 
+// Tree 1 (left)
+glColor3f(0.8f, 0.4f, 0.1f);
+glBegin(GL_QUADS);
+glVertex2i(450, 400);
+glVertex2i(450, 470);
+glVertex2i(470, 470);
+glVertex2i(470, 400);
+glEnd();
+
+glColor3f(0.0f, 0.7f, 0.0f);
+glColor3f(0.0f, 0.7f, 0.0f);
+drawCircle(460, 500, 30, 100);
+drawCircle(440, 480, 25, 100);
+drawCircle(480, 480, 25, 100);
+
+// Tree 2 (Further Right)
+glColor3f(0.8f, 0.4f, 0.1f);
+glBegin(GL_QUADS);
+glVertex2i(650, 400);
+glVertex2i(650, 470);
+glVertex2i(670, 470);
+glVertex2i(670, 400);
+glEnd();
+
+glColor3f(0.0f, 0.7f, 0.0f);
+glColor3f(0.0f, 0.7f, 0.0f);
+drawCircle(660, 500, 30, 100);
+drawCircle(640, 480, 25, 100);
+drawCircle(680, 480, 25, 100);
+
+//-------------------------------------------------
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+//----------------------------------------------------
 
     // sun draw
     if(isNight==false)
@@ -761,16 +984,17 @@ drawCircle(920.0f, 720.0f, 25.5f, 100); // Right circle
         drawCircle(400.0f, 850.0f, 75.0f, 100); // Center (0,0), radius 0.5, 100 segments
     }
 
+    //-------------------------------------------------
 
 
-    // Cloud 1
-    drawCloud(cloud1X, cloud1Y, 50.0f);
 
-    // Cloud 2
-    drawCloud(cloud2X,cloud2Y, 40.0f);
 
-    // Cloud 3
-    drawCloud(cloud3X, cloud3Y, 60.0f);
+    // Draw clouds with different sizes
+    drawCloud(cloud1X, cloud1Y, 50.0f);  // Medium cloud
+    drawCloud(cloud2X, cloud2Y, 45.0f);  // Slightly smaller cloud
+    drawCloud(cloud3X, cloud3Y, 55.0f);  // Slightly larger cloud
+
+
 
     glFlush();
 
@@ -786,6 +1010,7 @@ void handleKeypress(unsigned char key, int x, int y)
     case '0': // Day mode
         isNight = false;
         break;
+
     }
     glutPostRedisplay(); // Trigger redisplay
 }
@@ -819,6 +1044,8 @@ int main(int argc, char** argv)
     glutTimerFunc(0, updateClouds, 0); // Start the cloud animation
     glutTimerFunc(0, updateCar, 0);//start the car animation
     glutTimerFunc(0, updateCar2, 0);
+    glutSpecialFunc(specialKeypress1); // Detect arrow keys
+
     glutTimerFunc(0, movewind, 0); // Start animation
     glutMainLoop();
     return 0;
